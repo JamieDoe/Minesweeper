@@ -1,54 +1,52 @@
 
 // Global Variables
-let rows;
-let cols;
-let dificulty;
+// let rows;
+// let cols;
+// let dificulty;
+
+let rows = 10;
+let cols = 10;
 
 
-// will be updated to JSX later
+// will be updated to JSX
 
-const body = document.querySelector("body");
-const userInput = document.createElement("input");
-const submitBtn = document.createElement("button");
-submitBtn.textContent = "Submit";
-submitBtn.onclick = () => {
-  if (userInput.value === "") {
-    alert("Please enter a dificulty");
-    return;
-  }
-  localStorage.setItem("Dificulty", userInput.value);
-  dificulty = localStorage.getItem("Dificulty");
-  dificultySelection();
-}
-body.appendChild(userInput);
-body.appendChild(submitBtn);
+// const body = document.querySelector("body");
+// const userInput = document.createElement("input");
+// const submitBtn = document.createElement("button");
+// submitBtn.textContent = "Submit";
 
-// ====================
+// submitBtn.onclick = () => {
+//   localStorage.setItem("Dificulty", userInput.value);
+//   dificulty = localStorage.getItem("Dificulty");
+//   dificultySelection();
+// }
 
-function dificultySelection() {
- if (dificulty === "easy") {
-    rows = 10;
-    cols = 10;
-  } else if (dificulty === "medium") {
-    rows = 15;
-    cols = 15;
-  } else if (dificulty === "hard") {
-    rows = 30;
-    cols = 15;
-  }
-  console.log(rows, cols);
-}
+// body.appendChild(userInput);
+// body.appendChild(submitBtn);
+
+// function dificultySelection() {
+//  if (dificulty === "easy") {
+//     rows = 10, cols = 10;
+//   } else if (dificulty === "medium") {
+//     rows = 15, cols = 15;
+//   } else if (dificulty === "hard") {
+//     rows = 30, cols = 15;
+//   }
+//   console.log(rows, cols);
+// }
 
 // Creates cells
-function createCell(id, isMine) {
-  return {
+const cells = (id, isMine) => {
+
+
+  
+  return ({
     isMine: false,
     isRevealed: false,
     isFlagged: false,
     cellId: id,
-  };
+  });
 }
-
 
 // Generates mines
 function addMines() {
@@ -81,14 +79,19 @@ function generateGrid() {
     const row = [];
 
     for (let j = 0; j < cols; j++) { 
-      row.push(createCell(i * cols + j + 1));
+      row.push(cells(i * cols + j + 1,));
+
+      if (mines.includes(i * cols + j + 1)) {
+        console.log(row[j].isMine = true);
+      }
     }
     board.push(row);
   }
-
+  
   return board
     
 }
 
 const gameBoard = generateGrid();
 console.log(gameBoard);
+// console.log(cellList)
